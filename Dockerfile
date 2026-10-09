@@ -7,7 +7,10 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN pnpm run build
+RUN DATABASE_URL="postgres://appuser:placeholder@localhost:5432/appdb" \
+    ORIGIN="http://localhost:3000" \
+    BETTER_AUTH_SECRET="temporary-build-secret-not-for-production" \
+    pnpm run build
 RUN pnpm prune --prod
 
 FROM node:22-alpine AS runner
