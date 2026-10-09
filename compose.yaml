@@ -15,7 +15,7 @@ services:
       retries: 10
 
   app:
-    image: ghcr.io/cjeera/bsc-sveltkit-test-image:0.1.1
+    image: ghcr.io/cjeera/bsc-sveltkit-test-image:${IMAGE_TAG:?Required}
     pull_policy: always
     restart: unless-stopped
     ports:
